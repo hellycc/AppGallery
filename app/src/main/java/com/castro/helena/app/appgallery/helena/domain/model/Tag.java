@@ -4,31 +4,36 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import androidx.annotation.Nullable;
+
 public class Tag implements Serializable {
 
+    @Nullable
     @SerializedName("description")
     String tagDescription;
 
     @SerializedName("display_name")
     String displayName;
 
+    @Nullable
     @SerializedName("followers")
     Integer followers;
 
     public Tag() {
     }
 
-    public Tag(String tagDescription, String displayName, Integer followers) {
+    public Tag(@Nullable String tagDescription, String displayName, @Nullable Integer followers) {
         this.tagDescription = tagDescription;
         this.displayName = displayName;
         this.followers = followers;
     }
 
+    @Nullable
     public String getTagDescription() {
         return tagDescription;
     }
 
-    public void setTagDescription(String tagDescription) {
+    public void setTagDescription(@Nullable String tagDescription) {
         this.tagDescription = tagDescription;
     }
 
@@ -40,11 +45,12 @@ public class Tag implements Serializable {
         this.displayName = displayName;
     }
 
+    @Nullable
     public Integer getFollowers() {
         return followers;
     }
 
-    public void setFollowers(Integer followers) {
+    public void setFollowers(@Nullable Integer followers) {
         this.followers = followers;
     }
 

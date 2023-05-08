@@ -5,12 +5,21 @@ import androidx.annotation.NonNull;
 import com.castro.helena.app.appgallery.helena.BuildConfig;
 import com.castro.helena.app.appgallery.helena.common.Constants;
 import com.castro.helena.app.appgallery.helena.data.remote.GallerySearchApi;
+import com.castro.helena.app.appgallery.helena.data.remote.dto.DataAggDto;
+import com.castro.helena.app.appgallery.helena.data.remote.dto.DataDetailDto;
 import com.castro.helena.app.appgallery.helena.data.repository.GallerySearchRepositoryImpl;
 import com.castro.helena.app.appgallery.helena.domain.repository.GallerySearchRepository;
+import com.castro.helena.app.appgallery.helena.domain.usecase.dataagg.GetDataAggUseCase;
+import com.castro.helena.app.appgallery.helena.domain.usecase.dataagg.GetDataAggUseCaseImpl;
+import com.castro.helena.app.appgallery.helena.domain.usecase.datadetail.GetDataDetailUseCase;
+import com.castro.helena.app.appgallery.helena.domain.usecase.datadetail.GetDataDetailUseCaseImpl;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
+import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
 import okhttp3.OkHttpClient;
@@ -23,10 +32,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @InstallIn(SingletonComponent.class)
 public class AppModule {
 
+    @Singleton
+    @Provides
     public GallerySearchApi provideGallerySearchApi() {
         return new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .client(provideOkHttpClient())
+                .baseUrl(Constants.BASE_URL + Constants.API_VERSION)
+                .client(getOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(GallerySearchApi.class);
@@ -34,7 +45,7 @@ public class AppModule {
 
 
     @NonNull
-    private OkHttpClient provideOkHttpClient() {
+    private OkHttpClient getOkHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.addInterceptor(chain -> {
             Request original = chain.request();
@@ -47,17 +58,30 @@ public class AppModule {
         builder.connectTimeout(30, TimeUnit.SECONDS);
         builder.readTimeout(30, TimeUnit.SECONDS);
         if (BuildConfig.DEBUG) {
-            builder.addInterceptor(loggingInterceptor());
+            builder.addInterceptor(getLoggingInterceptor());
         }
         return builder.build();
     }
 
-    private HttpLoggingInterceptor loggingInterceptor() {
+    private HttpLoggingInterceptor getLoggingInterceptor() {
         return new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
-    public GallerySearchRepository provideGallerySearchRepository(GallerySearchApi api) {
-        return new GallerySearchRepositoryImpl(api);
+    @Singleton
+    @Provides
+    public GallerySearchRepository provideGallerySearchRepository(GallerySearchApi api, DataDetailDto dto) {
+        return new GallerySearchRepositoryImpl(api, dto);
+    }
+    @Singleton
+    @Provides
+    public GetDataAggUseCase provideGetDataAggUseCase(GallerySearchRepository repository) {
+        return new GetDataAggUseCaseImpl(repository);
+    }
+
+    @Singleton
+    @Provides
+    public GetDataDetailUseCase provideGetDataDetailUseCase(GallerySearchRepository repository, DataAggDto dataAggDto) {
+        return new GetDataDetailUseCaseImpl(repository, dataAggDto);
     }
 
 }

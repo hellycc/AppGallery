@@ -1,35 +1,36 @@
 package com.castro.helena.app.appgallery.helena.domain.model;
 
-import com.google.gson.annotations.SerializedName;
+import androidx.annotation.Nullable;
+
+import com.castro.helena.app.appgallery.helena.data.remote.dto.DataAggDto;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class DataAgg implements Serializable {
 
-    @SerializedName("data")
+    @Nullable
     List<DataDetail> imageList;
 
-    @SerializedName("success")
     Boolean success;
 
-    @SerializedName("status")
     Integer statusCode;
 
     public DataAgg() {
     }
 
-    public DataAgg(List<DataDetail> imageList, Boolean success, Integer statusCode) {
+    public DataAgg(@Nullable List<DataDetail> imageList, Boolean success, Integer statusCode) {
         this.imageList = imageList;
         this.success = success;
         this.statusCode = statusCode;
     }
 
+    @Nullable
     public List<DataDetail> getImageList() {
         return imageList;
     }
 
-    public void setImageList(List<DataDetail> imageList) {
+    public void setImageList(@Nullable List<DataDetail> imageList) {
         this.imageList = imageList;
     }
 
@@ -47,6 +48,14 @@ public class DataAgg implements Serializable {
 
     public void setStatusCode(Integer statusCode) {
         this.statusCode = statusCode;
+    }
+
+    public DataAggDto toDto(DataAgg entity) {
+        DataAggDto dto = new DataAggDto();
+        dto.setDataAgg(entity.getImageList());
+        dto.setSuccess(entity.getSuccess());
+        dto.setStatusCode(entity.getStatusCode());
+        return dto;
     }
 
 }

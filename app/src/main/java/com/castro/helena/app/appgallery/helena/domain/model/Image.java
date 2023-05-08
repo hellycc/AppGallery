@@ -4,8 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import androidx.annotation.Nullable;
+
 public class Image implements Serializable {
 
+    @Nullable
     @SerializedName("description")
     String imageDescription;
 
@@ -18,17 +21,18 @@ public class Image implements Serializable {
     public Image() {
     }
 
-    public Image(String imageDescription, String imageType, String imageUrl) {
+    public Image(@androidx.annotation.Nullable String imageDescription, String imageType, String imageUrl) {
         this.imageDescription = imageDescription;
         this.imageType = imageType;
         this.imageUrl = imageUrl;
     }
 
+    @Nullable
     public String getImageDescription() {
         return imageDescription;
     }
 
-    public void setImageDescription(String imageDescription) {
+    public void setImageDescription(@Nullable String imageDescription) {
         this.imageDescription = imageDescription;
     }
 

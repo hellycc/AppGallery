@@ -29,16 +29,16 @@ public abstract class Resource<T> {
         this.message = message;
     }
 
-    static class Success<T> extends Resource<T> {
+    public static class Success<T> extends Resource<T> {
         T data;
     }
 
-    static class Error<T> extends Resource<T> {
+    public static class Error<T> extends Resource<T> {
         T data;
         String message;
     }
 
-    static class Loading<T> extends Resource<T> {
+    public static class Loading<T> extends Resource<T> {
         T data;
     }
 
