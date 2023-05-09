@@ -14,13 +14,13 @@ import dagger.hilt.android.WithFragmentBindings;
 import dagger.hilt.android.qualifiers.ActivityContext;
 
 @WithFragmentBindings
-public class GallerySearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class GetDataAggAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     final Context context;
     final DataAgg dataAgg;
 
     @Inject
-    public GallerySearchAdapter(@ActivityContext Context context, DataAgg dataAgg) {
+    public GetDataAggAdapter(@ActivityContext Context context, DataAgg dataAgg) {
         this.context = context;
         this.dataAgg = dataAgg;
     }

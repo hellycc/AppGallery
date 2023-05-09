@@ -9,6 +9,8 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class DataAggDto implements Serializable {
 
     @Nullable
@@ -21,6 +23,7 @@ public class DataAggDto implements Serializable {
     @SerializedName("status")
     Integer statusCode;
 
+    @Inject
     public DataAggDto() {
     }
 

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import dagger.hilt.android.WithFragmentBindings;
 
 @WithFragmentBindings
-public class ImageDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class GetDataDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @NonNull
     @Override

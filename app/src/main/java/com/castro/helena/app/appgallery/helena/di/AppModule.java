@@ -5,14 +5,6 @@ import androidx.annotation.NonNull;
 import com.castro.helena.app.appgallery.helena.BuildConfig;
 import com.castro.helena.app.appgallery.helena.common.Constants;
 import com.castro.helena.app.appgallery.helena.data.remote.GallerySearchApi;
-import com.castro.helena.app.appgallery.helena.data.remote.dto.DataAggDto;
-import com.castro.helena.app.appgallery.helena.data.remote.dto.DataDetailDto;
-import com.castro.helena.app.appgallery.helena.data.repository.GallerySearchRepositoryImpl;
-import com.castro.helena.app.appgallery.helena.domain.repository.GallerySearchRepository;
-import com.castro.helena.app.appgallery.helena.domain.usecase.dataagg.GetDataAggUseCase;
-import com.castro.helena.app.appgallery.helena.domain.usecase.dataagg.GetDataAggUseCaseImpl;
-import com.castro.helena.app.appgallery.helena.domain.usecase.datadetail.GetDataDetailUseCase;
-import com.castro.helena.app.appgallery.helena.domain.usecase.datadetail.GetDataDetailUseCaseImpl;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,8 +24,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @InstallIn(SingletonComponent.class)
 public class AppModule {
 
-    @Singleton
     @Provides
+    @Singleton
     public GallerySearchApi provideGallerySearchApi() {
         return new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL + Constants.API_VERSION)
@@ -42,7 +34,6 @@ public class AppModule {
                 .build()
                 .create(GallerySearchApi.class);
     }
-
 
     @NonNull
     private OkHttpClient getOkHttpClient() {
@@ -65,23 +56,6 @@ public class AppModule {
 
     private HttpLoggingInterceptor getLoggingInterceptor() {
         return new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
-    }
-
-    @Singleton
-    @Provides
-    public GallerySearchRepository provideGallerySearchRepository(GallerySearchApi api, DataDetailDto dto) {
-        return new GallerySearchRepositoryImpl(api, dto);
-    }
-    @Singleton
-    @Provides
-    public GetDataAggUseCase provideGetDataAggUseCase(GallerySearchRepository repository) {
-        return new GetDataAggUseCaseImpl(repository);
-    }
-
-    @Singleton
-    @Provides
-    public GetDataDetailUseCase provideGetDataDetailUseCase(GallerySearchRepository repository, DataAggDto dataAggDto) {
-        return new GetDataDetailUseCaseImpl(repository, dataAggDto);
     }
 
 }

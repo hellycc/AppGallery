@@ -7,6 +7,8 @@ import com.castro.helena.app.appgallery.helena.data.remote.dto.DataDetailDto;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class DataDetail implements Serializable {
 
     String title;
@@ -24,6 +26,7 @@ public class DataDetail implements Serializable {
     @Nullable
     String error;
 
+    @Inject
     public DataDetail() {
     }
 

@@ -10,6 +10,8 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class DataDetailDto implements Serializable {
 
     @SerializedName("title")
@@ -33,6 +35,7 @@ public class DataDetailDto implements Serializable {
     @SerializedName("error")
     String error;
 
+    @Inject
     public DataDetailDto() {
     }
 

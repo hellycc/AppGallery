@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.castro.helena.app.appgallery.helena.R;
 import com.castro.helena.app.appgallery.helena.databinding.FragmentGallerySearchLandscapeBinding;
 import com.castro.helena.app.appgallery.helena.databinding.FragmentGallerySearchPortraitBinding;
-import com.castro.helena.app.appgallery.helena.presentation.adapter.GallerySearchAdapter;
+import com.castro.helena.app.appgallery.helena.presentation.adapter.GetDataAggAdapter;
 
 import javax.inject.Inject;
 
@@ -26,7 +26,7 @@ import dagger.hilt.android.scopes.FragmentScoped;
 public class GallerySearchFragment extends Fragment {
 
     @Inject
-    GallerySearchAdapter mAdapter;
+    GetDataAggAdapter mAdapter;
     FragmentGallerySearchPortraitBinding portraitBinding;
     FragmentGallerySearchLandscapeBinding landscapeBinding;
 
@@ -34,7 +34,7 @@ public class GallerySearchFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public GallerySearchFragment(GallerySearchAdapter mAdapter) {
+    public GallerySearchFragment(GetDataAggAdapter mAdapter) {
         this.mAdapter = mAdapter;
     }
 
@@ -55,7 +55,7 @@ public class GallerySearchFragment extends Fragment {
 //            mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-//        portraitBinding.rvImages.setAdapter(new GallerySearchAdapter());
+//        portraitBinding.rvImages.setAdapter(new GetDataAggAdapter());
     }
 
     @Override

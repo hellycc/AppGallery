@@ -10,8 +10,8 @@ import com.castro.helena.app.appgallery.helena.data.remote.dto.DataAggDto;
 import com.castro.helena.app.appgallery.helena.data.remote.dto.DataDetailDto;
 import com.castro.helena.app.appgallery.helena.domain.model.DataAgg;
 import com.castro.helena.app.appgallery.helena.domain.model.DataDetail;
-import com.castro.helena.app.appgallery.helena.domain.usecase.dataagg.GetDataAggUseCaseImpl;
-import com.castro.helena.app.appgallery.helena.domain.usecase.datadetail.GetDataDetailUseCaseImpl;
+import com.castro.helena.app.appgallery.helena.domain.usecase.dataagg.GetDataAggUseCase;
+import com.castro.helena.app.appgallery.helena.domain.usecase.datadetail.GetDataDetailUseCase;
 
 import javax.inject.Inject;
 
@@ -29,12 +29,8 @@ public final class GallerySearchViewModel extends ViewModel {
 
     final SavedStateHandle handle;
 
-    @Inject
-    GetDataAggUseCaseImpl dataAggUseCaseImpl;
-    @Inject
-    GetDataDetailUseCaseImpl dataDetailUseCaseImpl;
-    @Inject
-    Disposable disposable;
+    final GetDataAggUseCase dataAggUseCase;
+    final GetDataDetailUseCase dataDetailUseCase;
 
     private final MutableLiveData<DataAgg> _dataAgg = new MutableLiveData<>();
     final LiveData<DataAgg> dataAgg = _dataAgg;
@@ -43,16 +39,15 @@ public final class GallerySearchViewModel extends ViewModel {
     final LiveData<DataDetail> dataDetail = _dataDetail;
 
     @Inject
-    public GallerySearchViewModel(SavedStateHandle handle, final GetDataAggUseCaseImpl dataAggUseCaseImpl, GetDataDetailUseCaseImpl dataDetailUseCaseImpl, Disposable disposable) {
+    public GallerySearchViewModel(SavedStateHandle handle, final GetDataAggUseCase dataAggUseCase, GetDataDetailUseCase dataDetailUseCase) {
         this.handle = handle;
-        this.dataAggUseCaseImpl = dataAggUseCaseImpl;
-        this.dataDetailUseCaseImpl = dataDetailUseCaseImpl;
-        this.disposable = disposable;
+        this.dataAggUseCase = dataAggUseCase;
+        this.dataDetailUseCase = dataDetailUseCase;
     }
 
     @ViewModelScoped
     public Observable<Resource<DataAggDto>> getDataAgg(String query) {
-        Observable<Resource<DataAggDto>> response = dataAggUseCaseImpl.invoke(query);
+        Observable<Resource<DataAggDto>> response = dataAggUseCase.invoke(query);
         response.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(getDataAggObserver());
@@ -61,7 +56,7 @@ public final class GallerySearchViewModel extends ViewModel {
 
     @ViewModelScoped
     public Observable<DataDetailDto> getDataDetail() {
-        Observable<DataDetailDto> response = dataDetailUseCaseImpl.invoke();
+        Observable<DataDetailDto> response = dataDetailUseCase.invoke();
         response.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(getDataDetailObserver());
@@ -72,7 +67,7 @@ public final class GallerySearchViewModel extends ViewModel {
         return new Observer<Resource<DataAggDto>>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
-                disposable = d;
+                d.dispose();
                 // show loading;
             }
 
@@ -97,7 +92,7 @@ public final class GallerySearchViewModel extends ViewModel {
         return new Observer<DataDetailDto>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
-                disposable = d;
+                d.dispose();
                 // show loading;
             }
 
