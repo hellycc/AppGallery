@@ -1,5 +1,6 @@
 package com.castro.helena.app.appgallery.helena.domain.model;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.castro.helena.app.appgallery.helena.data.source.remote.dto.DataDetailDto;
@@ -90,6 +91,7 @@ public class DataDetail implements Serializable {
         this.error = error;
     }
 
+    @NonNull
     public DataDetailDto toDto(DataDetail entity) {
         DataDetailDto dto = new DataDetailDto();
         dto.setTitle(entity.getTitle());
