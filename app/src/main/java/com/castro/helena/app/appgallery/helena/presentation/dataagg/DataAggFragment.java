@@ -12,6 +12,11 @@ import androidx.fragment.app.Fragment;
 
 import com.castro.helena.app.appgallery.helena.R;
 import com.castro.helena.app.appgallery.helena.databinding.FragmentDataAggPortraitBinding;
+import com.castro.helena.app.appgallery.helena.domain.model.DataAgg;
+import com.castro.helena.app.appgallery.helena.domain.model.DataDetail;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -23,6 +28,8 @@ public class DataAggFragment extends Fragment {
     DataAggViewModel viewModel;
 
     GetDataAggAdapter mAdapter;
+
+    DataAgg dataAgg;
     FragmentDataAggPortraitBinding binding;
 
     public DataAggFragment() {
@@ -30,9 +37,10 @@ public class DataAggFragment extends Fragment {
     }
 
     @Inject
-    public DataAggFragment(DataAggViewModel viewModel, GetDataAggAdapter mAdapter) {
+    public DataAggFragment(DataAggViewModel viewModel, GetDataAggAdapter mAdapter, DataAgg dataAgg) {
         this.viewModel = viewModel;
         this.mAdapter = mAdapter;
+        this.dataAgg = dataAgg;
     }
 
     @Override
@@ -40,17 +48,10 @@ public class DataAggFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_data_agg_portrait, container, false);
-    }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        populateDataAgg();
         setupBtnSearchListener();
     }
 
@@ -59,15 +60,15 @@ public class DataAggFragment extends Fragment {
         binding.btnSearch.setOnClickListener(v -> {
             if (query != null && !query.isEmpty()) {
                 viewModel.fetchGallerySearch(query);
-                viewModel.dataAgg.getValue();
             } else {
                 Toast.makeText(requireContext(), "Campo de pesquisa vazio!", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void setupAdapter() {
-
+    private void populateDataAgg() {
+        GetDataAggAdapter dataAggAdapter = new GetDataAggAdapter(requireContext(), viewModel.dataAgg.getValue());
+        binding.rvImages.setAdapter(dataAggAdapter);
     }
 
 }
