@@ -1,4 +1,4 @@
-package com.castro.helena.app.appgallery.helena.presentation;
+package com.castro.helena.app.appgallery.helena.presentation.datadetail;
 
 import static android.content.Context.WINDOW_SERVICE;
 
@@ -14,36 +14,36 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.castro.helena.app.appgallery.helena.R;
-import com.castro.helena.app.appgallery.helena.databinding.FragmentDataAggLandscapeBinding;
-import com.castro.helena.app.appgallery.helena.databinding.FragmentDataAggPortraitBinding;
-import com.castro.helena.app.appgallery.helena.presentation.adapter.GetDataAggAdapter;
+import com.castro.helena.app.appgallery.helena.databinding.FragmentDataDetailLandscapeBinding;
+import com.castro.helena.app.appgallery.helena.databinding.FragmentDataDetailPortraitBinding;
+import com.castro.helena.app.appgallery.helena.presentation.dataagg.DataAggViewModel;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.scopes.ActivityScoped;
 
 @ActivityScoped
-public class DataAggFragment extends Fragment {
+public class DataDetailFragment extends Fragment {
 
     @Inject
     DataAggViewModel viewModel;
     @Inject
-    GetDataAggAdapter mAdapter;
-    FragmentDataAggPortraitBinding portraitBinding;
-    FragmentDataAggLandscapeBinding landscapeBinding;
+    GetDataDetailAdapter mAdapter;
+    FragmentDataDetailPortraitBinding portraitBinding;
+    FragmentDataDetailLandscapeBinding landscapeBinding;
 
-    public DataAggFragment() {
+    public DataDetailFragment() {
         // Required empty public constructor
     }
 
     @Inject
-    public DataAggFragment(DataAggViewModel viewModel, GetDataAggAdapter mAdapter) {
+    public DataDetailFragment(DataAggViewModel viewModel, GetDataDetailAdapter mAdapter) {
         this.viewModel = viewModel;
         this.mAdapter = mAdapter;
     }
 
-    public static DataAggFragment newInstance() {
-        DataAggFragment fragment = new DataAggFragment();
+    public static DataDetailFragment newInstance(String param1, String param2) {
+        DataDetailFragment fragment = new DataDetailFragment();
         Bundle args = new Bundle();
 //        args.putString(ARG_PARAM1, param1);
 //        args.putString(ARG_PARAM2, param2);
@@ -54,19 +54,19 @@ public class DataAggFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
+        if (getArguments() != null) {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
+        }
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         int orientation = getScreenRotation();
         if (orientation == Surface.ROTATION_90 || orientation == Surface.ROTATION_270) {
-            return inflater.inflate(R.layout.fragment_data_agg_landscape, container, false);
+            return inflater.inflate(R.layout.fragment_data_detail_landscape, container, false);
         } else {
-            return inflater.inflate(R.layout.fragment_data_agg_portrait, container, false);
+            return inflater.inflate(R.layout.fragment_data_detail_portrait, container, false);
         }
     }
 
@@ -74,16 +74,6 @@ public class DataAggFragment extends Fragment {
         Display display = ((WindowManager) requireContext()
                 .getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
         return display.getRotation();
-    }
-
-    private void getSearchbarQuery(String query) {
-        int orientation = getScreenRotation();
-        if (orientation == Surface.ROTATION_90 || orientation == Surface.ROTATION_270) {
-            viewModel.getDataAgg(query);
-//            portraitBinding.searchBar.getText();
-        } else {
-//            landscapeBinding.searchBar.getText();
-        }
     }
 
 }

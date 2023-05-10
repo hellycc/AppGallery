@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dataAggFragment">
+
+    <fragment
+        android:id="@+id/dataAggFragment"
+        android:name="com.castro.helena.app.appgallery.helena.presentation.dataagg.DataAggFragment"
+        android:label="DataAggFragment"
+        tools:layout="@layout/fragment_data_agg_portrait">
+        <action
+            android:id="@+id/action_dataAggFragment_to_dataDetailFragment"
+            app:destination="@id/dataDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/dataDetailFragment"
+        android:name="com.castro.helena.app.appgallery.helena.presentation.datadetail.DataDetailFragment"
+        android:label="DataDetailFragment"
+        tools:layout="@layout/fragment_data_detail_portrait" />
+
+</navigation>

@@ -2,11 +2,9 @@ package com.castro.helena.app.appgallery.helena.domain.repository;
 
 
 import com.castro.helena.app.appgallery.helena.data.source.remote.dto.DataAggDto;
-import com.castro.helena.app.appgallery.helena.data.source.remote.dto.DataDetailDto;
-
-import io.reactivex.rxjava3.core.Observable;
+import com.castro.helena.app.appgallery.helena.domain.model.DataDetail;
 
 public interface GetDataDetailRepository {
 
-    Observable<DataDetailDto> getImageDetail(DataAggDto dataAggDto);
+    DataDetail getImageDetail(DataAggDto dataAggDto);
 }

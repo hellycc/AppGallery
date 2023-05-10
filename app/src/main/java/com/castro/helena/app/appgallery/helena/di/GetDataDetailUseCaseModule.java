@@ -1,8 +1,8 @@
 package com.castro.helena.app.appgallery.helena.di;
 
 
-import com.castro.helena.app.appgallery.helena.domain.usecase.datadetail.GetDataDetailUseCase;
-import com.castro.helena.app.appgallery.helena.domain.usecase.datadetail.GetDataDetailUseCaseImpl;
+import com.castro.helena.app.appgallery.helena.domain.usecase.GetDataDetailUseCase;
+import com.castro.helena.app.appgallery.helena.domain.usecase.GetDataDetailUseCaseImpl;
 
 import javax.inject.Singleton;
 

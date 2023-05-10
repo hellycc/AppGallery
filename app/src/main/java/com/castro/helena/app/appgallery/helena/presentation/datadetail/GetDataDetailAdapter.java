@@ -1,4 +1,4 @@
-package com.castro.helena.app.appgallery.helena.presentation.adapter;
+package com.castro.helena.app.appgallery.helena.presentation.datadetail;
 
 import android.view.ViewGroup;
 
