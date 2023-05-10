@@ -8,7 +8,7 @@ import com.castro.helena.app.appgallery.helena.domain.repository.GetDataAggRepos
 
 import javax.inject.Inject;
 
-import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.Single;
 
 public class GetDataAggRepositoryImpl implements GetDataAggRepository {
 
@@ -20,7 +20,7 @@ public class GetDataAggRepositoryImpl implements GetDataAggRepository {
     }
 
     @Override
-    public Observable<Resource<DataAggDto>> getGalleryImages(String query) {
+    public Single<Resource<DataAggDto>> getGalleryImages(String query) {
         return api.getGallerySearch(query);
     }
 

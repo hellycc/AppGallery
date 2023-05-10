@@ -1,7 +1,9 @@
 package com.castro.helena.app.appgallery.helena.di;
 
-import com.castro.helena.app.appgallery.helena.domain.usecase.dataagg.GetDataAggUseCase;
-import com.castro.helena.app.appgallery.helena.domain.usecase.dataagg.GetDataAggUseCaseImpl;
+import com.castro.helena.app.appgallery.helena.common.Resource;
+import com.castro.helena.app.appgallery.helena.data.source.remote.dto.DataAggDto;
+import com.castro.helena.app.appgallery.helena.domain.usecase.GetDataAggUseCase;
+import com.castro.helena.app.appgallery.helena.domain.usecase.GetDataAggUseCaseImpl;
 
 import javax.inject.Singleton;
 
@@ -16,6 +18,6 @@ public abstract class GetDataAggUseCaseModule {
 
     @Binds
     @Singleton
-    abstract GetDataAggUseCase bindGetDataAggUseCase(GetDataAggUseCaseImpl dataAggUseCaseImpl);
+    abstract GetDataAggUseCase<Resource<DataAggDto>> bindGetDataAggUseCase(GetDataAggUseCaseImpl dataAggUseCaseImpl);
 
 }

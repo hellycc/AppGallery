@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 
 import com.castro.helena.app.appgallery.helena.BuildConfig;
 import com.castro.helena.app.appgallery.helena.common.Constants;
+import com.castro.helena.app.appgallery.helena.common.MyCustomDisposable;
+import com.castro.helena.app.appgallery.helena.common.MyCustomDisposableImpl;
 import com.castro.helena.app.appgallery.helena.data.source.remote.GallerySearchApi;
+import com.castro.helena.app.appgallery.helena.domain.model.DataAgg;
 
 import java.util.concurrent.TimeUnit;
 
@@ -14,6 +17,7 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
+import io.reactivex.disposables.CompositeDisposable;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -56,6 +60,18 @@ public class AppModule {
 
     private HttpLoggingInterceptor getLoggingInterceptor() {
         return new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
+    }
+
+    @Provides
+    @Singleton
+    public CompositeDisposable provideCompositeDisposable() {
+        return new CompositeDisposable();
+    }
+
+    @Provides
+    @Singleton
+    public MyCustomDisposable provideMyCustomDisposable() {
+        return new MyCustomDisposableImpl();
     }
 
 }

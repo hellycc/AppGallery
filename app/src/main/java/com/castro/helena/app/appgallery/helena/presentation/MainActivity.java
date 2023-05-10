@@ -1,21 +1,22 @@
 package com.castro.helena.app.appgallery.helena.presentation;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import com.castro.helena.app.appgallery.helena.R;
 import com.castro.helena.app.appgallery.helena.databinding.ActivityMainBinding;
+import com.castro.helena.app.appgallery.helena.presentation.dataagg.DataAggViewModel;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
-
-    public MainActivity() {
-        super(R.layout.activity_main);
-    }
 
     DataAggViewModel viewModel;
     ActivityMainBinding binding;
@@ -23,26 +24,35 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setupMainActivityLayout();
+        setupNavHost();
         viewModel = initViewModel();
-        if (savedInstanceState == null) {
-            getFragment();
+    }
+
+    private void setupMainActivityLayout() {
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+        setSupportActionBar(binding.toolbar);
+    }
+
+    private void setupNavHost() {
+        NavHostFragment navHostFragment =
+                (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        if (navHostFragment != null) {
+            NavController navController = navHostFragment.getNavController();
+            NavigationUI.setupActionBarWithNavController(this, navController);
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        return super.onSupportNavigateUp();
     }
 
     private DataAggViewModel initViewModel() {
         return new ViewModelProvider(this).get(DataAggViewModel.class);
     }
 
-    private void getFragment() {
-//        // TODO: some initial data to start Fragment...
-//        Bundle bundle = new Bundle();
-//        bundle.putInt("some_int", 0);
-//
-//        getSupportFragmentManager().beginTransaction()
-//                .setReorderingAllowed(true)
-//                .add(R.id.fragment_container_view, DataAggFragment.class, bundle)
-//                .commit();
-        DataAggFragment.newInstance();
-    }
 
 }

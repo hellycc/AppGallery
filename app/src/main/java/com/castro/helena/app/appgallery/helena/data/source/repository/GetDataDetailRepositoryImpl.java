@@ -1,12 +1,15 @@
 package com.castro.helena.app.appgallery.helena.data.source.repository;
 
 import com.castro.helena.app.appgallery.helena.data.source.remote.dto.DataAggDto;
-import com.castro.helena.app.appgallery.helena.data.source.remote.dto.DataDetailDto;
+import com.castro.helena.app.appgallery.helena.domain.model.DataDetail;
+import com.castro.helena.app.appgallery.helena.domain.model.Image;
 import com.castro.helena.app.appgallery.helena.domain.repository.GetDataDetailRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.rxjava3.core.Observable;
 
 public class GetDataDetailRepositoryImpl implements GetDataDetailRepository {
 
@@ -15,7 +18,7 @@ public class GetDataDetailRepositoryImpl implements GetDataDetailRepository {
     }
 
     @Override
-    public Observable<DataDetailDto> getImageDetail(DataAggDto dataAggDto) {
+    public DataDetail getImageDetail(DataAggDto dataAggDto) {
         // TODO get array of Image(s);
 //        List<Image> images = new ArrayList<>();
 //        if (dataAggDto.getDataAgg() != null && dataAggDto.getDataAgg().size() > 0) {
@@ -25,8 +28,7 @@ public class GetDataDetailRepositoryImpl implements GetDataDetailRepository {
 //                }
 //           }
 //        }
-//        return null;
-
+//        return images;
         return null;
     }
 
