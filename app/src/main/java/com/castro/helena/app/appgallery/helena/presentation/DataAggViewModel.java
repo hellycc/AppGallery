@@ -6,8 +6,8 @@ import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
 
 import com.castro.helena.app.appgallery.helena.common.Resource;
-import com.castro.helena.app.appgallery.helena.data.remote.dto.DataAggDto;
-import com.castro.helena.app.appgallery.helena.data.remote.dto.DataDetailDto;
+import com.castro.helena.app.appgallery.helena.data.source.remote.dto.DataAggDto;
+import com.castro.helena.app.appgallery.helena.data.source.remote.dto.DataDetailDto;
 import com.castro.helena.app.appgallery.helena.domain.model.DataAgg;
 import com.castro.helena.app.appgallery.helena.domain.model.DataDetail;
 import com.castro.helena.app.appgallery.helena.domain.usecase.dataagg.GetDataAggUseCase;
@@ -25,7 +25,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 @HiltViewModel
-public final class GallerySearchViewModel extends ViewModel {
+public final class DataAggViewModel extends ViewModel {
 
     final SavedStateHandle handle;
 
@@ -39,7 +39,7 @@ public final class GallerySearchViewModel extends ViewModel {
     final LiveData<DataDetail> dataDetail = _dataDetail;
 
     @Inject
-    public GallerySearchViewModel(SavedStateHandle handle, final GetDataAggUseCase dataAggUseCase, GetDataDetailUseCase dataDetailUseCase) {
+    public DataAggViewModel(SavedStateHandle handle, final GetDataAggUseCase dataAggUseCase, GetDataDetailUseCase dataDetailUseCase) {
         this.handle = handle;
         this.dataAggUseCase = dataAggUseCase;
         this.dataDetailUseCase = dataDetailUseCase;

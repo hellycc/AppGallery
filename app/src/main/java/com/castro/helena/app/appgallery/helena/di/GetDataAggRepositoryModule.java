@@ -1,6 +1,6 @@
 package com.castro.helena.app.appgallery.helena.di;
 
-import com.castro.helena.app.appgallery.helena.data.repository.GetDataAggRepositoryImpl;
+import com.castro.helena.app.appgallery.helena.data.source.repository.GetDataAggRepositoryImpl;
 import com.castro.helena.app.appgallery.helena.domain.repository.GetDataAggRepository;
 
 import javax.inject.Singleton;

@@ -1,7 +1,7 @@
-package com.castro.helena.app.appgallery.helena.data.remote;
+package com.castro.helena.app.appgallery.helena.data.source.remote;
 
 import com.castro.helena.app.appgallery.helena.common.Resource;
-import com.castro.helena.app.appgallery.helena.data.remote.dto.DataAggDto;
+import com.castro.helena.app.appgallery.helena.data.source.remote.dto.DataAggDto;
 
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.GET;
