@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.castro.helena.app.appgallery.helena.BuildConfig;
 import com.castro.helena.app.appgallery.helena.common.Constants;
-import com.castro.helena.app.appgallery.helena.data.remote.GallerySearchApi;
+import com.castro.helena.app.appgallery.helena.data.source.remote.GallerySearchApi;
 
 import java.util.concurrent.TimeUnit;
 

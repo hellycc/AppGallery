@@ -8,27 +8,41 @@ import androidx.lifecycle.ViewModelProvider;
 import com.castro.helena.app.appgallery.helena.R;
 import com.castro.helena.app.appgallery.helena.databinding.ActivityMainBinding;
 
-
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
-    GallerySearchViewModel viewModel;
+    public MainActivity() {
+        super(R.layout.activity_main);
+    }
+
+    DataAggViewModel viewModel;
     ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         viewModel = initViewModel();
+        if (savedInstanceState == null) {
+            getFragment();
+        }
     }
 
-    private GallerySearchViewModel initViewModel() {
-        return new ViewModelProvider(this).get(GallerySearchViewModel.class);
+    private DataAggViewModel initViewModel() {
+        return new ViewModelProvider(this).get(DataAggViewModel.class);
     }
 
-
-    // TODO inflate GallerySearchFragment according to portrait or landscape;
+    private void getFragment() {
+//        // TODO: some initial data to start Fragment...
+//        Bundle bundle = new Bundle();
+//        bundle.putInt("some_int", 0);
+//
+//        getSupportFragmentManager().beginTransaction()
+//                .setReorderingAllowed(true)
+//                .add(R.id.fragment_container_view, DataAggFragment.class, bundle)
+//                .commit();
+        DataAggFragment.newInstance();
+    }
 
 }

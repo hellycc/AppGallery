@@ -1,4 +1,4 @@
-package com.castro.helena.app.appgallery.helena.data.remote.dto;
+package com.castro.helena.app.appgallery.helena.data.source.remote.dto;
 
 import androidx.annotation.Nullable;
 

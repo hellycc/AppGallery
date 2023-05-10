@@ -2,7 +2,7 @@ package com.castro.helena.app.appgallery.helena.domain.model;
 
 import androidx.annotation.Nullable;
 
-import com.castro.helena.app.appgallery.helena.data.remote.dto.DataAggDto;
+import com.castro.helena.app.appgallery.helena.data.source.remote.dto.DataAggDto;
 
 import java.io.Serializable;
 import java.util.List;
